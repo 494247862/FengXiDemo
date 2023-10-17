@@ -57,4 +57,3 @@ notAuthUrls: #不用鉴权的url，注意逗号
       /swagger-resources/**,
       /webjars/**
 ```
-4、登录密码 admin deyi@2023
