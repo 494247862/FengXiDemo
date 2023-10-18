@@ -1,0 +1,48 @@
+# 应用名称
+spring:
+  application:
+    name: auth
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 10240MB
+  profiles:
+    active: dev
+
+# 端口
+server:
+  port: 8080
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:/mappers/**/*.xml
+  type-aliases-package: com.fengxi.auth.entity
+
+app-id: xxx
+
+
+app-secret: xxxx
+
+common:
+  redisUserKey: login-demo #登录存储到redis的key名称
+  logSaveDay: 30 #保存多少天的日志 一定要整数
+  redisWebStocketChanne: deyi.channe.demo #webstocket频道名，用于解决分布式难题
+  file:
+    path: files_${spring.application.name}
+  token:
+    key: fengxi #token密钥
+    single: false #是否单点登录
+    timeout: 480 #分钟 过期时间
+    notAuthUrls: #不用鉴权的url，注意逗号
+      /user/login,
+      /user/testSocket/**,
+      /swagger-ui.html,
+      /v2/api-docs,
+      /swagger-resources/configuration/ui,
+      /swagger-resources,
+      /swagger-resources/configuration/security,
+      /swagger-resources/**,
+      /webjars/**,
+      /excel/**,
+      /notice/**

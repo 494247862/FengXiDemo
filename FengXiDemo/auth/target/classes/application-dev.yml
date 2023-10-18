@@ -1,0 +1,24 @@
+spring:
+  datasource: # mysql连接配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: deyi_demo
+    username: root
+    password: wujiuhe5201314
+    #    url: jdbc:mysql://bus.deyisoft.cn:3306/deyi_demo?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/fengxi_demo?serverTimezone=UTC
+  jpa:
+    hibernate: #数据库生成策略，如果打开会根据entity对象生成数据库。生产环境尽量不要使用
+      ddl-auto: update
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 解决swagger报错
+  redis: # 连接redis （目前用于基础鉴权，可用流水号之类的功能）
+    host: 192.168.133.128
+    port: 6379
+    password: myredis
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 输出sql日志
+common:
+  swagger:
+    enabled: true #是否开启swagger

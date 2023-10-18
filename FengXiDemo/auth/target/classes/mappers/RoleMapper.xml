@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengxi.auth.dao.RoleMapper">
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1)
+        from deyi_role
+        where is_deleted = 0
+        <if test="roleCode != null">
+            and role_code like concat('%',#{roleCode},'%')
+        </if>
+        <if test="roleName != null">
+            and role_name like concat('%',#{roleCode},'%')
+        </if>
+    </select>
+
+    <select id="QueryRolePage" resultType="com.fengxi.auth.entity.DeyiRole">
+        select *
+        from deyi_role
+        where is_deleted = 0
+        <if test="roleCode != null">
+            and role_code like concat('%',#{roleCode},'%')
+        </if>
+        <if test="roleName != null">
+            and role_name like concat('%',#{roleName},'%')
+        </if>
+        limit #{page},#{pageSize}
+    </select>
+
+    <select id="getUserByCode" resultType="com.fengxi.auth.entity.DeyiUser">
+        select t2.*
+        from deyi_role t1
+                 left join deyi_user t2 on find_in_set(t1.id, t2.role_ids) and t2.is_deleted = 0
+        where t1.role_code = #{code}
+          and t1.is_deleted = 0
+    </select>
+</mapper>
